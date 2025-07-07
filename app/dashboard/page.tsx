@@ -127,7 +127,7 @@ export default function DashboardPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -209,7 +209,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+          <Card className="bg-white/20 dark:bg-slate-800/70 backdrop-blur-xl dark:border-slate-700/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -246,7 +246,7 @@ export default function DashboardPage() {
 
           <TabsContent value="overview" className="space-y-6">
             {/* Recent Projects */}
-            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-xl font-semibold">Recent Projects</CardTitle>
                 <Button variant="outline" size="sm" asChild>
@@ -269,7 +269,7 @@ export default function DashboardPage() {
                     {recentProjects.map((project) => (
                       <div
                         key={project.id}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border dark:border-slate-600/20"
                       >
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
@@ -368,7 +368,7 @@ export default function DashboardPage() {
           </TabsContent>
 
           <TabsContent value="candidates" className="space-y-6">
-            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold">Top Matching Candidates</CardTitle>
                 <p className="text-slate-600 dark:text-slate-400">
@@ -388,7 +388,7 @@ export default function DashboardPage() {
                     {topCandidates.map((candidate) => (
                       <div
                         key={candidate.id}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border dark:border-slate-600/20"
                       >
                         <div className="flex items-center gap-4">
                           <Avatar className="h-12 w-12">
@@ -444,7 +444,7 @@ export default function DashboardPage() {
           </TabsContent>
 
           <TabsContent value="actions" className="space-y-6">
-            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold">Recommended Actions</CardTitle>
                 <p className="text-slate-600 dark:text-slate-400">Important tasks that need your attention</p>
