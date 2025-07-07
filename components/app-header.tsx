@@ -171,7 +171,7 @@ export function AppHeader() {
               forceMount
             >
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Profile</Link>
+                <Link href="/dashboard">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/settings">Settings</Link>
