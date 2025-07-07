@@ -62,7 +62,7 @@ export function AppSidebar() {
             <Briefcase className="h-4 w-5" />
           </div>
           <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-data-[collapsible=icon]:hidden">
-            TechCorp
+            TalentMatch
           </span>
         </div>
       </SidebarHeader>
