@@ -18,8 +18,8 @@ import { cn } from "@/lib/utils"
 import { format, subDays, subMonths, subYears, startOfDay, endOfDay } from "date-fns"
 
 export interface DateRange {
-  from: Date | undefined
-  to: Date | undefined
+  from?: Date
+  to?: Date
 }
 
 export interface FilterOptions {
@@ -237,7 +237,7 @@ export function DashboardFilters({ onFiltersChange, className }: DashboardFilter
                   initialFocus
                   mode="range"
                   defaultMonth={dateRange?.from}
-                  selected={dateRange}
+                  selected={{ from: dateRange.from ?? undefined, to: dateRange.to ?? undefined }}
                   onSelect={handleCustomDateSelect}
                   numberOfMonths={2}
                 />
