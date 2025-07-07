@@ -6,8 +6,8 @@ import {
   Users,
   Briefcase,
   TrendingUp,
+  TrendingDown,
   Clock,
-  CheckCircle,
   AlertCircle,
   Plus,
   Eye,
@@ -16,6 +16,7 @@ import {
   UserPlus,
   Award,
   Target,
+  Loader2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -23,76 +24,8 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DashboardLayout } from "@/components/dashboard-layout"
-
-// Mock data
-const dashboardStats = {
-  totalProjects: 12,
-  activeProjects: 8,
-  totalApplications: 156,
-  shortlistedCandidates: 23,
-  selectedCandidates: 8,
-  offeredPositions: 5,
-}
-
-const recentProjects = [
-  {
-    id: 1,
-    title: "Frontend Developer Intern",
-    applications: 23,
-    status: "Active",
-    deadline: "2024-02-15",
-    matchingCandidates: 12,
-  },
-  {
-    id: 2,
-    title: "Backend Developer",
-    applications: 18,
-    status: "Active",
-    deadline: "2024-02-20",
-    matchingCandidates: 8,
-  },
-  {
-    id: 3,
-    title: "UI/UX Designer",
-    applications: 31,
-    status: "Closed",
-    deadline: "2024-01-30",
-    matchingCandidates: 15,
-  },
-]
-
-const topCandidates = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    university: "MIT",
-    course: "Computer Science",
-    matchScore: 95,
-    skills: ["React", "TypeScript", "Node.js"],
-    status: "Available",
-    appliedProject: "Frontend Developer Intern",
-  },
-  {
-    id: 2,
-    name: "Mike Chen",
-    university: "Stanford",
-    course: "Software Engineering",
-    matchScore: 92,
-    skills: ["Python", "Django", "PostgreSQL"],
-    status: "Shortlisted",
-    appliedProject: "Backend Developer",
-  },
-  {
-    id: 3,
-    name: "Emma Davis",
-    university: "UC Berkeley",
-    course: "Design",
-    matchScore: 88,
-    skills: ["Figma", "Adobe XD", "Prototyping"],
-    status: "Selected",
-    appliedProject: "UI/UX Designer",
-  },
-]
+import { DashboardFilters, type FilterOptions } from "@/components/dashboard-filters"
+import { useDashboardData } from "@/hooks/use-dashboard-data"
 
 const recommendedActions = [
   {
@@ -120,29 +53,43 @@ const recommendedActions = [
 
 export default function DashboardPage() {
   const [selectedTab, setSelectedTab] = useState("overview")
+  const { dashboardStats, recentProjects, topCandidates, filters, updateFilters, isLoading } = useDashboardData()
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "active":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
       case "closed":
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
       case "available":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
       case "shortlisted":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
       case "selected":
-        return "bg-purple-100 text-purple-800"
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
     }
   }
 
   const getMatchScoreColor = (score: number) => {
-    if (score >= 90) return "text-green-600"
-    if (score >= 80) return "text-blue-600"
-    if (score >= 70) return "text-yellow-600"
-    return "text-red-600"
+    if (score >= 90) return "text-green-600 dark:text-green-400"
+    if (score >= 80) return "text-blue-600 dark:text-blue-400"
+    if (score >= 70) return "text-yellow-600 dark:text-yellow-400"
+    return "text-red-600 dark:text-red-400"
+  }
+
+  const formatGrowth = (growth: number) => {
+    const isPositive = growth >= 0
+    return {
+      value: `${isPositive ? "+" : ""}${growth}%`,
+      color: isPositive ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400",
+      icon: isPositive ? TrendingUp : TrendingDown,
+    }
+  }
+
+  const handleFiltersChange = (newFilters: FilterOptions) => {
+    updateFilters(newFilters)
   }
 
   return (
@@ -165,6 +112,19 @@ export default function DashboardPage() {
           </Button>
         </div>
 
+        {/* Filters */}
+        <DashboardFilters onFiltersChange={handleFiltersChange} />
+
+        {/* Loading Overlay */}
+        {isLoading && (
+          <div className="fixed inset-0 bg-black/20 dark:bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-xl flex items-center gap-3">
+              <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
+              <span className="text-slate-700 dark:text-slate-300">Updating dashboard...</span>
+            </div>
+          </div>
+        )}
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20">
@@ -179,8 +139,16 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm">
-                <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-                <span className="text-green-600 dark:text-green-400">+2 this month</span>
+                {(() => {
+                  const growth = formatGrowth(dashboardStats.projectsGrowth)
+                  const Icon = growth.icon
+                  return (
+                    <>
+                      <Icon className="h-4 w-4 mr-1" />
+                      <span className={growth.color}>{growth.value} from last period</span>
+                    </>
+                  )
+                })()}
               </div>
             </CardContent>
           </Card>
@@ -199,8 +167,16 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm">
-                <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
-                <span className="text-green-600 dark:text-green-400">+12 this week</span>
+                {(() => {
+                  const growth = formatGrowth(dashboardStats.applicationsGrowth)
+                  const Icon = growth.icon
+                  return (
+                    <>
+                      <Icon className="h-4 w-4 mr-1" />
+                      <span className={growth.color}>{growth.value} from last period</span>
+                    </>
+                  )
+                })()}
               </div>
             </CardContent>
           </Card>
@@ -219,8 +195,16 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm">
-                <Clock className="h-4 w-4 text-yellow-500 mr-1" />
-                <span className="text-yellow-600 dark:text-yellow-400">Pending review</span>
+                {(() => {
+                  const growth = formatGrowth(dashboardStats.shortlistedGrowth)
+                  const Icon = growth.icon
+                  return (
+                    <>
+                      <Icon className="h-4 w-4 mr-1" />
+                      <span className={growth.color}>{growth.value} from last period</span>
+                    </>
+                  )
+                })()}
               </div>
             </CardContent>
           </Card>
@@ -237,8 +221,16 @@ export default function DashboardPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center text-sm">
-                <CheckCircle className="h-4 w-4 text-green-500 mr-1" />
-                <span className="text-green-600 dark:text-green-400">3 accepted</span>
+                {(() => {
+                  const growth = formatGrowth(dashboardStats.offersGrowth)
+                  const Icon = growth.icon
+                  return (
+                    <>
+                      <Icon className="h-4 w-4 mr-1" />
+                      <span className={growth.color}>{growth.value} from last period</span>
+                    </>
+                  )
+                })()}
               </div>
             </CardContent>
           </Card>
@@ -262,49 +254,61 @@ export default function DashboardPage() {
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {recentProjects.map((project) => (
-                    <div
-                      key={project.id}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-slate-900 dark:text-white">{project.title}</h3>
-                          <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                {recentProjects.length === 0 ? (
+                  <div className="text-center py-8">
+                    <Briefcase className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                    <p className="text-slate-600 dark:text-slate-400">
+                      No projects found for the selected time period.
+                    </p>
+                    <Button className="mt-4" asChild>
+                      <Link href="/dashboard/post-project">Create Your First Project</Link>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {recentProjects.map((project) => (
+                      <div
+                        key={project.id}
+                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-semibold text-slate-900 dark:text-white">{project.title}</h3>
+                            <Badge className={getStatusColor(project.status)}>{project.status}</Badge>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+                            <span className="flex items-center gap-1">
+                              <Users className="h-4 w-4" />
+                              {project.applications} applications
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Target className="h-4 w-4" />
+                              {project.matchingCandidates} matches
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              Due {new Date(project.deadline).toLocaleDateString()}
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-                          <span className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            {project.applications} applications
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Target className="h-4 w-4" />
-                            {project.matchingCandidates} matches
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            Due {new Date(project.deadline).toLocaleDateString()}
-                          </span>
+                        <div className="flex items-center gap-2 mt-3 sm:mt-0">
+                          <Button variant="outline" size="sm" asChild>
+                            <Link href={`/dashboard/projects/${project.id}`}>
+                              <Eye className="h-4 w-4 mr-1" />
+                              View
+                            </Link>
+                          </Button>
+                          <Button variant="outline" size="sm" asChild>
+                            <Link href={`/dashboard/projects/${project.id}/applications`}>
+                              <Users className="h-4 w-4 mr-1" />
+                              Applications
+                            </Link>
+                          </Button>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 mt-3 sm:mt-0">
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={`/dashboard/projects/${project.id}`}>
-                            <Eye className="h-4 w-4 mr-1" />
-                            View
-                          </Link>
-                        </Button>
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={`/dashboard/projects/${project.id}/applications`}>
-                            <Users className="h-4 w-4 mr-1" />
-                            Applications
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -372,60 +376,69 @@ export default function DashboardPage() {
                 </p>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {topCandidates.map((candidate) => (
-                    <div
-                      key={candidate.id}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
-                    >
-                      <div className="flex items-center gap-4">
-                        <Avatar className="h-12 w-12">
-                          <AvatarImage src={`/placeholder.svg?height=48&width=48`} />
-                          <AvatarFallback className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                            {candidate.name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-1">
-                            <h3 className="font-semibold text-slate-900 dark:text-white">{candidate.name}</h3>
-                            <Badge className={getStatusColor(candidate.status)}>{candidate.status}</Badge>
-                            <span className={`text-sm font-semibold ${getMatchScoreColor(candidate.matchScore)}`}>
-                              {candidate.matchScore}% match
-                            </span>
-                          </div>
-                          <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                            {candidate.course} • {candidate.university}
-                          </p>
-                          <div className="flex flex-wrap gap-1">
-                            {candidate.skills.slice(0, 3).map((skill) => (
-                              <Badge key={skill} variant="secondary" className="text-xs">
-                                {skill}
-                              </Badge>
-                            ))}
+                {topCandidates.length === 0 ? (
+                  <div className="text-center py-8">
+                    <Users className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                    <p className="text-slate-600 dark:text-slate-400">
+                      No candidates found for the selected time period.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {topCandidates.map((candidate) => (
+                      <div
+                        key={candidate.id}
+                        className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-white/20 dark:border-slate-600/20"
+                      >
+                        <div className="flex items-center gap-4">
+                          <Avatar className="h-12 w-12">
+                            <AvatarImage src={`/placeholder.svg?height=48&width=48`} />
+                            <AvatarFallback className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                              {candidate.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-1">
+                              <h3 className="font-semibold text-slate-900 dark:text-white">{candidate.name}</h3>
+                              <Badge className={getStatusColor(candidate.status)}>{candidate.status}</Badge>
+                              <span className={`text-sm font-semibold ${getMatchScoreColor(candidate.matchScore)}`}>
+                                {candidate.matchScore}% match
+                              </span>
+                            </div>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+                              {candidate.course} • {candidate.university}
+                            </p>
+                            <div className="flex flex-wrap gap-1">
+                              {candidate.skills.slice(0, 3).map((skill) => (
+                                <Badge key={skill} variant="secondary" className="text-xs">
+                                  {skill}
+                                </Badge>
+                              ))}
+                            </div>
                           </div>
                         </div>
+                        <div className="flex items-center gap-2 mt-3 sm:mt-0">
+                          <Button variant="outline" size="sm" asChild>
+                            <Link href={`/dashboard/candidates/${candidate.id}`}>
+                              <Eye className="h-4 w-4 mr-1" />
+                              View Profile
+                            </Link>
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                          >
+                            <UserPlus className="h-4 w-4 mr-1" />
+                            Recommend
+                          </Button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 mt-3 sm:mt-0">
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={`/dashboard/candidates/${candidate.id}`}>
-                            <Eye className="h-4 w-4 mr-1" />
-                            View Profile
-                          </Link>
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                        >
-                          <UserPlus className="h-4 w-4 mr-1" />
-                          Recommend
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
