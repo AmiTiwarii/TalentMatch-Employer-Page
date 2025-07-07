@@ -184,7 +184,7 @@ export default function SettingsPage() {
             </div>
             <Button
               variant="outline"
-              className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 w-fit"
+              className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 w-fit"
               asChild
             >
               <Link href="/profile/public">
@@ -197,24 +197,24 @@ export default function SettingsPage() {
 
         {/* Settings Tabs */}
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
-            <TabsTrigger value="profile" className="flex items-center gap-2 text-xs lg:text-sm">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 bg-white/20 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
+            <TabsTrigger value="profile" className="flex items-center justify-center gap-2 text-xs lg:text-sm border">
               <User className="h-3 w-3 lg:h-4 lg:w-4" />
               <span className="hidden sm:inline">Profile</span>
             </TabsTrigger>
-            <TabsTrigger value="notifications" className="flex items-center gap-2 text-xs lg:text-sm">
+            <TabsTrigger value="notifications" className="flex items-center gap-2 text-xs lg:text-sm border">
               <Bell className="h-3 w-3 lg:h-4 lg:w-4" />
               <span className="hidden sm:inline">Notifications</span>
             </TabsTrigger>
-            <TabsTrigger value="security" className="flex items-center gap-2 text-xs lg:text-sm">
+            <TabsTrigger value="security" className="flex items-center gap-2 text-xs lg:text-sm border">
               <Shield className="h-3 w-3 lg:h-4 lg:w-4" />
               <span className="hidden sm:inline">Security</span>
             </TabsTrigger>
-            <TabsTrigger value="team" className="flex items-center gap-2 text-xs lg:text-sm">
+            <TabsTrigger value="team" className="flex items-center gap-2 text-xs lg:text-sm border">
               <Users className="h-3 w-3 lg:h-4 lg:w-4" />
               <span className="hidden sm:inline">Team</span>
             </TabsTrigger>
-            <TabsTrigger value="preferences" className="flex items-center gap-2 text-xs lg:text-sm">
+            <TabsTrigger value="preferences" className="flex items-center gap-2 text-xs lg:text-sm border">
               <SettingsIcon className="h-3 w-3 lg:h-4 lg:w-4" />
               <span className="hidden sm:inline">Preferences</span>
             </TabsTrigger>
@@ -222,7 +222,7 @@ export default function SettingsPage() {
 
           {/* Profile Tab */}
           <TabsContent value="profile" className="space-y-6">
-            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
@@ -333,7 +333,7 @@ export default function SettingsPage() {
 
           {/* Notifications Tab */}
           <TabsContent value="notifications" className="space-y-6">
-            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Bell className="h-5 w-5" />
@@ -458,7 +458,7 @@ export default function SettingsPage() {
 
           {/* Security Tab */}
           <TabsContent value="security" className="space-y-6">
-            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5" />
@@ -625,7 +625,7 @@ export default function SettingsPage() {
 
           {/* Team Tab */}
           <TabsContent value="team" className="space-y-6">
-            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
               <CardHeader>
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div>
@@ -704,7 +704,7 @@ export default function SettingsPage() {
 
           {/* Preferences Tab */}
           <TabsContent value="preferences" className="space-y-6">
-            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+            <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <SettingsIcon className="h-5 w-5" />

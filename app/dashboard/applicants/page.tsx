@@ -432,7 +432,7 @@ export default function ApplicantsPage() {
               {filteredApplicants.map((applicant) => (
                 <Card
                   key={applicant.id}
-                  className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-white/20 dark:border-slate-700/20 transition-all hover:shadow-lg ${
+                  className={`bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm  dark:border-slate-700/20 transition-all hover:shadow-lg ${
                     selectedApplicants.includes(applicant.id) ? "ring-2 ring-blue-500" : ""
                   }`}
                 >

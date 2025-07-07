@@ -187,7 +187,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
 
   if (viewMode === "list") {
     return (
-      <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
+      <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
         <CardContent className="p-4 lg:p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 flex-1 min-w-0">
@@ -312,7 +312,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20"
+                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
                 >
                   <DropdownMenuItem asChild>
                     <Link href={`/dashboard/pods/${pod.id}`}>
@@ -339,7 +339,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
   }
 
   return (
-    <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200 group h-fit">
+    <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200 group h-fit">
       <CardContent className="p-4 lg:p-6">
         <div className="text-center mb-4">
           <Avatar className="h-16 w-16 lg:h-20 lg:w-20 mx-auto mb-3">
@@ -446,7 +446,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
             </p>
           </div>
 
-          <div className="flex flex-col gap-2 pt-3 border-t border-white/20 dark:border-white/10">
+          <div className="flex flex-col gap-2 pt-3 border-t dark:border-white/10">
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" className="bg-transparent border-slate-200 text-xs flex-1" asChild>
                 <Link href={`/dashboard/pods/${pod.id}`}>
@@ -470,7 +470,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
-                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20"
+                  className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
                 >
                   <DropdownMenuItem asChild>
                     <Link href={`/dashboard/pods/${pod.id}`}>
@@ -500,7 +500,7 @@ function PodCard({ pod, viewMode }: { pod: any; viewMode: "grid" | "list" }) {
 function PodSkeleton({ viewMode }: { viewMode: "grid" | "list" }) {
   if (viewMode === "list") {
     return (
-      <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+      <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
         <CardContent className="p-4 lg:p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 flex-1">
@@ -527,7 +527,7 @@ function PodSkeleton({ viewMode }: { viewMode: "grid" | "list" }) {
   }
 
   return (
-    <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+    <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
       <CardContent className="p-4 lg:p-6">
         <div className="text-center mb-4">
           <Skeleton className="h-16 w-16 lg:h-20 lg:w-20 rounded-full mx-auto mb-3" />
@@ -642,7 +642,7 @@ export default function PodsPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
-          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
+          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
             <CardContent className="p-4 lg:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -655,7 +655,7 @@ export default function PodsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
+          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
             <CardContent className="p-4 lg:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -668,7 +668,7 @@ export default function PodsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
+          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
             <CardContent className="p-4 lg:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -681,7 +681,7 @@ export default function PodsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
+          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 hover:shadow-lg transition-all duration-200">
             <CardContent className="p-4 lg:p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -697,7 +697,7 @@ export default function PodsPage() {
         </div>
 
         {/* Filters and Controls */}
-        <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20 mb-6 lg:mb-8">
+        <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20 mb-6 lg:mb-8">
           <CardContent className="p-4 lg:p-6">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
@@ -749,7 +749,7 @@ export default function PodsPage() {
                     <SelectTrigger className="w-full sm:w-40 bg-white/50 dark:bg-white/10 border-slate-200 dark:border-slate-700">
                       <SelectValue placeholder="Category" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20">
+                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
                       {categories.map((category) => (
                         <SelectItem key={category} value={category}>
                           {category}
@@ -761,7 +761,7 @@ export default function PodsPage() {
                     <SelectTrigger className="w-full sm:w-32 bg-white/50 dark:bg-white/10 border-slate-200 dark:border-slate-700">
                       <SelectValue placeholder="Privacy" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20">
+                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
                       {privacyOptions.map((privacy) => (
                         <SelectItem key={privacy} value={privacy}>
                           {privacy}
@@ -773,7 +773,7 @@ export default function PodsPage() {
                     <SelectTrigger className="w-full sm:w-32 bg-white/50 dark:bg-white/10 border-slate-200 dark:border-slate-700">
                       <SelectValue placeholder="Status" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20">
+                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
                       {statusOptions.map((status) => (
                         <SelectItem key={status} value={status}>
                           {status}
@@ -785,7 +785,7 @@ export default function PodsPage() {
                     <SelectTrigger className="w-full sm:w-40 bg-white/50 dark:bg-white/10 border-slate-200 dark:border-slate-700">
                       <SelectValue placeholder="Sort by" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border-white/20">
+                    <SelectContent className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl">
                       <SelectItem value="recent">Most Recent</SelectItem>
                       <SelectItem value="members">Most Members</SelectItem>
                       <SelectItem value="posts">Most Posts</SelectItem>
@@ -810,7 +810,7 @@ export default function PodsPage() {
             ))}
           </div>
         ) : filteredPods.length === 0 ? (
-          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border-white/20 dark:border-slate-700/20">
+          <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl dark:border-slate-700/20">
             <CardContent className="p-8 lg:p-12 text-center">
               <Users className="h-8 w-8 lg:h-12 lg:w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No pods found</h3>
